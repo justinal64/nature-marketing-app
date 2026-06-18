@@ -25,6 +25,11 @@ function FadeUp({
   );
 }
 
+function todayLabel() {
+  const now = new Date();
+  return now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+}
+
 function PhoneMockup() {
   return (
     <div
@@ -61,7 +66,7 @@ function PhoneMockup() {
         <div className="px-5 pb-6 pt-4">
           {/* Greeting */}
           <p className="text-[10px] font-semibold tracking-wide text-muted mb-1">
-            Monday · June 17
+            {todayLabel()}
           </p>
           <p className="text-lg font-bold leading-tight text-foreground mb-4">
             Good morning,<br />friend.
