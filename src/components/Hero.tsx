@@ -176,7 +176,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 48 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.45, ease }}
-        className="relative mx-auto mt-20 w-[290px] md:mt-24"
+        className="relative mx-auto mt-20 w-[268px] sm:w-[290px] md:w-[320px] md:mt-24"
       >
         <PhoneMockup />
       </motion.div>
