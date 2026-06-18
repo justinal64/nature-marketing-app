@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 interface Section {
   heading: string;
   body: string;
@@ -15,12 +13,6 @@ export default function LegalLayout({ title, lastUpdated, sections }: Props) {
   return (
     <div className="min-h-screen bg-background px-6 py-24">
       <div className="mx-auto max-w-2xl">
-        <Link
-          href="/"
-          className="mb-10 inline-block text-xs font-semibold tracking-[0.18em] text-muted transition-colors hover:text-foreground"
-        >
-          ← WILDLENS
-        </Link>
         <h1 className="mb-2 text-4xl font-semibold tracking-tight text-foreground">
           {title}
         </h1>
