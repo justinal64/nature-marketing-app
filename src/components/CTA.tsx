@@ -10,6 +10,11 @@ export default function CTA() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("error");
+      setMessage("Please enter a valid email address.");
+      return;
+    }
     setStatus("loading");
 
     const res = await fetch("/api/waitlist", {
@@ -67,16 +72,19 @@ export default function CTA() {
                   onSubmit={handleSubmit}
                 >
                   <input
+                    id="waitlist-email"
                     type="email"
+                    inputMode="email"
+                    autoComplete="email"
                     placeholder="Email address"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
                       if (status === "error") setStatus("idle");
                     }}
-                    required
                     disabled={status === "loading"}
-                    className={`flex-1 rounded-full border bg-background/80 px-5 py-3 text-sm text-foreground placeholder:text-muted/60 outline-none transition-colors focus:border-accent disabled:opacity-50 ${
+                    aria-describedby={status === "error" ? "waitlist-error" : undefined}
+                    className={`flex-1 rounded-full border bg-background/80 px-5 py-3 text-sm text-foreground placeholder:text-muted/60 outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20 disabled:opacity-50 ${
                       status === "error" ? "border-red-400/60" : "border-hairline"
                     }`}
                   />
@@ -90,9 +98,14 @@ export default function CTA() {
                 </form>
               )}
 
-              {status === "error" && (
-                <p className="mt-3 text-sm text-red-500/80">{message}</p>
-              )}
+              <p
+                id="waitlist-error"
+                role="alert"
+                aria-live="polite"
+                className={`mt-3 text-sm text-red-500/80 transition-opacity ${status === "error" ? "opacity-100" : "opacity-0 select-none"}`}
+              >
+                {status === "error" ? message : " "}
+              </p>
 
               {status !== "success" && (
                 <p className="mt-6 text-xs text-muted/70">
